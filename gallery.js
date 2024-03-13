@@ -112,15 +112,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const groundTruthContainer = document.createElement("div");
     groundTruthContainer.classList.add("ground-truth-container");
 
+    const placeholderDiv = document.createElement("div");
+  placeholderDiv.classList.add("image-placeholder");
+  placeholderDiv.style.backgroundColor = "#ffdad3"; 
+
     const groundTruthImageElement = document.createElement("img");
     groundTruthImageElement.setAttribute("data-src", groundTruthImage.url);
     // groundTruthImageElement.src = groundTruthImage.url;
     groundTruthImageElement.alt = groundTruthImage.alt;
     groundTruthImageElement.classList.add("ground-truth-image", "lazy-load");
 
+      // Hide the placeholder when the image is loaded
+    groundTruthImageElement.onload = function() {
+    placeholderDiv.style.display = 'none';
+    groundTruthImageElement.classList.remove("lazy-load");
+  };
+
     const groundTruthAlt = document.createElement("div");
     groundTruthAlt.textContent = groundTruthImage.alt;
     groundTruthAlt.classList.add("ground-truth-alt");
+    groundTruthContainer.appendChild(placeholderDiv);
     groundTruthContainer.appendChild(groundTruthImageElement);
     groundTruthContainer.appendChild(groundTruthAlt);
 
