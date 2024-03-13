@@ -123,14 +123,6 @@ body {
     background-color: rgba(255, 159, 243, 0.5);
   }
   
-  .tag-moondream2 .job-title {
-    max-width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  
   .tag-llava13b {
     background-color: rgba(26, 83, 92, 0.5);
   }
@@ -164,20 +156,43 @@ body {
     box-sizing: border-box;
   }
   
+  .image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    /* background-color: #ececec; */
+  }
+  
   .describe-image {
     width: 100%;
     height: auto;
-    display: block;
+    display: block;   
+    background-color: #ffdad3;
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite ease-in-out;
   }
   
+  .gallery-item img,  
+  .describe-image {
+    background-color: #ffdad3;
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite ease-in-out;
+  }
+
   .describe-image.lazy-load {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
   }
   
   .describe-image.loaded {
+    position: relative;
+    z-index: 1;
     opacity: 1;
   }
+  
 
   .prompt-tooltip {
     position: absolute;
