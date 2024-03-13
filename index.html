@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Describe Comparison</title>
+    <meta name="description" content="A deep dive into comparing AI-generated image descriptions across different models.">
+
+  <!-- Open Graph / Facebook -->
+  <!-- <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.yoursite.com/page-url">
+  <meta property="og:title" content="Describe Comparison - Explore AI Image Descriptions">
+  <meta property="og:description" content="A deep dive into comparing AI-generated image descriptions across different models.">
+  <meta property="og:image" content="https://assets.promptcel.com/images/og-image.jpg"> -->
+
+  <!-- Twitter -->
+  <!-- <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://promptcel.com/describe">
+  <meta property="twitter:title" content="Describe Comparison - Explore AI Image Descriptions">
+  <meta property="twitter:description" content="A deep dive into comparing AI-generated image descriptions across different models.">
+  <meta property="twitter:image" content="https://www.yoursite.com/images/twitter-og-image.jpg">
+   -->
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,900;1,400&family=Madimi+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/promptsiren_logo.svg" type="image/svg+xml">
+
+  </head>
+  <body>
+    <header>
+      <h1>PROMPTCEL | Describe</h1>
+    </header>
+    <main>
+        <section id="intro-animation" class="intro-animation">
+            <div class="intro-content">
+              <h1 class="intro-heading">Testing Midjourney's Describe</h1>              
+              <div class="intro-process">
+                <div class="process-step">
+                    <div class="icon-container">
+                    <svg class= "explore-icon" width="32" height="32" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m4.5 10.5-.447-.224a.5.5 0 0 0 .67.671zm2-4-.224-.447a.5.5 0 0 0-.223.223zm4-2 .447.224a.5.5 0 0 0-.67-.671zm-2 4 .224.447a.5.5 0 0 0 .223-.223zm-1 5.5A6.5 6.5 0 0 1 1 7.5H0A7.5 7.5 0 0 0 7.5 15zM14 7.5A6.5 6.5 0 0 1 7.5 14v1A7.5 7.5 0 0 0 15 7.5zM7.5 1A6.5 6.5 0 0 1 14 7.5h1A7.5 7.5 0 0 0 7.5 0zm0-1A7.5 7.5 0 0 0 0 7.5h1A6.5 6.5 0 0 1 7.5 1zM4.947 10.724l2-4-.894-.448-2 4zm1.777-3.777 4-2-.448-.894-4 2zm3.329-2.67-2 4 .894.447 2-4zM8.276 8.052l-4 2 .448.894 4-2z" fill="#000"/></svg>
+                    </div>
+                    <p class="process-text">Selected 40 top images from Explore page</p>
+                </div>
+                <div class="process-step">
+                    <div class="icon-container">
+                    <svg class= "describe-icon" width="45" height="45" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg"><path class="clr-i-solid clr-i-solid-path-1" d="M18 6a12 12 0 1 0 12 12A12 12 0 0 0 18 6m-2 5.15a2 2 0 1 1 2 2 2 2 0 0 1-2.1-2ZM23 24a1 1 0 0 1-1 1h-7a1 1 0 1 1 0-2h2v-6h-1a1 1 0 0 1 0-2h4v8h2a1 1 0 0 1 1 1"/><path fill="none" d="M0 0h36v36H0z"/></svg>
+                    </div>
+                    <p class="process-text">Generated descriptions using Describe, ChatGPT, Moondream2, and Llava 13b</p>
+                </div>
+                <div class="process-step">
+                    <div class="icon-container">
+                        <svg class="boat-icon" xmlns="http://www.w3.org/2000/svg" id="Layer_2" viewBox="0 0 360.1 301.5" width="45" height="45"><defs><style>.cls-1{fill:none;stroke:#231f20;stroke-linecap:round;stroke-linejoin:round;stroke-width:10.1px}</style></defs><g id="Layer_1-2"><path d="M53 229s81-84 1-224c0 0 158 76 173 213 0 0-92-43-174 11" class="cls-1"/><path d="M152 44s72 43 103 166c0 0 27-5 44 6 0 0-33-122-147-172m97 242c56-25 84-53 84-53L29 252l12 22" class="cls-1"/><path d="M5 296c4 0 7-1 11-3l22-16c6-5 15-5 22 0l21 16c7 5 16 5 22 0l22-16c7-5 16-5 22 0l22 16c7 5 15 5 22 0l22-16c7-5 15-5 22 0l22 16c7 5 15 5 22 0l22-16c6-5 15-5 22 0l21 16c4 2 7 3 11 3" class="cls-1"/></g></svg>
+
+                    </div>
+                  <p class="process-text">Recreated images using Midjourney based on the generated descriptions</p>
+                </div>
+                <div class="process-step">
+                    <div class="icon-container">
+                    <svg class="compare-icon" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M28 6H18V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h10v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2M4 15h6.17l-2.58 2.59L9 19l5-5-5-5-1.41 1.41L10.17 13H4V4h12v20H4Zm12 13v-2a2 2 0 0 0 2-2V8h10v9h-6.17l2.58-2.59L23 13l-5 5 5 5 1.41-1.41L21.83 19H28v9Z"/><path data-name="&lt;Transparent Rectangle&gt;" style="fill:none" d="M0 0h32v32H0z"/></svg>
+                  </div>
+                  
+                    <p class="process-text">Compared the original images with the AI-generated recreations</p>
+                </div>
+              </div>              
+            </div>
+          </section>
+        <section id="ground-truth-gallery" class="ground-truth-gallery"></section>
+        <section id="image-comparisons" class="image-comparisons"></section>        
+      <div id="modal-container" class="modal-container">
+        <div id="modal-content" class="modal-content">
+          <span class="close-button">&times;</span>
+          <!-- Table content will be dynamically added here -->
+        </div>
+      </div>
+      
+      <button class="info-button">i</button>
+    </main>
+    <script src="intro-animation.js"></script>
+    <script src="gallery.js"></script>
+    <script src="scrolly.js"></script>
+    <a href="#" class="back-to-top">&#8593;</a>
+  </body>
+</html>
