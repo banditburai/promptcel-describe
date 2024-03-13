@@ -27,6 +27,18 @@ document.addEventListener("DOMContentLoaded", function () {
     return galleryItem;
   }
 
+  function preloadImages(imageUrls) {
+    const promises = imageUrls.map((url) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = url;
+      });
+    });
+    return Promise.all(promises);
+  }
+
   function createImageComparison(groundTruthImage, jobs) {
     const comparisonSection = document.createElement("section");
     const groundTruthUrl =
@@ -110,21 +122,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function renderGallery(imageData) {
-    galleryContainer.innerHTML = "";  
-    const seed = Math.random();  
-    const shuffledImageData = shuffleArray(imageData, seed);
-  
-    shuffledImageData.forEach((image, index) => {
+    galleryContainer.innerHTML = "";
+        
+    imageData.forEach((image, index) => {
       image.id = index + 1;
       const galleryItem = createGalleryItem(image);
       galleryContainer.appendChild(galleryItem);
     });
-  }
-  
-  function shuffleArray(array, seed) {
-    const shuffledArray = [...array];
-    shuffledArray.sort(() => seed - 0.5);
-    return shuffledArray;
   }
 
   function createTableContent(groundTruthImage, jobs) {
@@ -397,9 +401,12 @@ window.addEventListener('resize', function() {
     fetch("optim_describe.json").then((response) => response.json()),
   ])
     .then(([galleryData, groundTruthData]) => {
-      renderGallery(galleryData);
-      renderImageComparisons(groundTruthData, galleryData);
-      observeSections();            
+      const groundTruthImageUrls = galleryData.map((image) => image.url);
+      preloadImages(groundTruthImageUrls).then(() => {
+        renderGallery(galleryData);
+        renderImageComparisons(groundTruthData, galleryData);
+        observeSections();
+      });
     })
     .catch((error) => {
       console.error("Error loading JSON data:", error);

@@ -413,15 +413,13 @@ body {
     overflow: hidden;
   }
   
-  .intro-animation::before {
-    content: "";
+.intro-background {
     position: absolute;
     top: -10%;
     left: 50%;
     width: 200%;
     height: 120%;
     background: linear-gradient(60deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), linear-gradient(60deg, #ff9a9e, #fad0c4, #ffecd2, #fcb69f);
-    /* background: linear-gradient(60deg, #ff9a9e, #fad0c4, #ffecd2, #fcb69f); */
     background-size: 800% 800%;
     animation: gradientShift 30s ease infinite, moveSlower 15s ease-in-out infinite;
     z-index: -1;

@@ -57,16 +57,15 @@ document.addEventListener("DOMContentLoaded", function () {
 //     backgroundPosition: "0 100%",
 //     ease: "linear",
 //   });
-
 const backgroundAnimation = gsap.timeline({ repeat: -1, yoyo: true });
-backgroundAnimation.to(".intro-animation::before", {
+backgroundAnimation.to(".intro-background", {
   duration: 10,
-  backgroundPosition: "100% 50%", 
-  ease: "Power1.easeInOut",
+  backgroundPosition: "100% 50%",
+  ease: "Power1.easeInOut"
 })
-.to(".intro-animation::before", {
+.to(".intro-background", {
   duration: 8,
-  backgroundPosition: "50% 100%", 
-  ease: "Power1.easeInOut",
-}, "<"); 
+  backgroundPosition: "50% 100%",
+  ease: "Power1.easeInOut"
+}, "<");
 });
