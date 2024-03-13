@@ -178,7 +178,7 @@ body {
   .describe-image.loaded {
     opacity: 1;
   }
-  
+
   .prompt-tooltip {
     position: absolute;
     top: 0;
@@ -199,7 +199,7 @@ body {
     font-family: 'Lato', sans-serif;
     overflow: hidden;
     text-overflow: ellipsis;
-    /* pointer-events: none; */
+    pointer-events: none;
   }
   
   .prompt-tooltip span {
