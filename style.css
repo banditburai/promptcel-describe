@@ -170,6 +170,15 @@ body {
     display: block;
   }
   
+  .describe-image.lazy-load {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .describe-image.loaded {
+    opacity: 1;
+  }
+  
   .prompt-tooltip {
     position: absolute;
     top: 0;

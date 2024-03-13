@@ -39,33 +39,75 @@ document.addEventListener("DOMContentLoaded", function () {
     return Promise.all(promises);
   }
 
+  function lazyLoadImages() {
+    const lazyImages = document.querySelectorAll(".lazy-load");
+  
+    const options = {
+      rootMargin: "0px",
+      threshold: 0.1,
+    };
+  
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.getAttribute("data-src");
+          img.classList.add("loaded");
+  
+          img.addEventListener("load", function() {
+            img.classList.remove("lazy-load");
+            const jobRow = img.closest(".image-row");
+            const allImagesLoaded = Array.from(jobRow.querySelectorAll("img")).every(
+              (img) => img.complete
+            );
+  
+            if (allImagesLoaded) {
+              jobRow.style.opacity = 1;
+              const promptTooltip = img.closest(".job-container").querySelector(".prompt-tooltip");
+              if (promptTooltip) {
+                promptTooltip.style.pointerEvents = "auto";
+              }
+            }
+          });
+  
+          observer.unobserve(img);
+        }
+      });
+    }, options);
+  
+    lazyImages.forEach((img) => {
+      observer.observe(img);
+    });
+  }
+
   function createImageComparison(groundTruthImage, jobs) {
     const comparisonSection = document.createElement("section");
     const groundTruthUrl =
       groundTruthImage.url.split("_index")[0].split(".com/")[1];
     comparisonSection.id = `image-${encodeURIComponent(groundTruthUrl)}`;
     comparisonSection.classList.add("comparison-section");
-  
+
     const groundTruthContainer = document.createElement("div");
     groundTruthContainer.classList.add("ground-truth-container");
-  
+
     const groundTruthImageElement = document.createElement("img");
-    groundTruthImageElement.src = groundTruthImage.url;
+    groundTruthImageElement.setAttribute("data-src", groundTruthImage.url);
+    // groundTruthImageElement.src = groundTruthImage.url;
     groundTruthImageElement.alt = groundTruthImage.alt;
-    groundTruthImageElement.classList.add("ground-truth-image");
-  
+    groundTruthImageElement.classList.add("ground-truth-image", "lazy-load");
+
     const groundTruthAlt = document.createElement("div");
     groundTruthAlt.textContent = groundTruthImage.alt;
     groundTruthAlt.classList.add("ground-truth-alt");
     groundTruthContainer.appendChild(groundTruthImageElement);
     groundTruthContainer.appendChild(groundTruthAlt);
-  
+
     const describeImagesContainer = document.createElement("div");
     describeImagesContainer.classList.add("describe-images-container");
-  
+
     const describeImages = document.createElement("div");
     describeImages.classList.add("describe-images");
-  
+
     const tagOrder = [
       "use_prompt",
       "describe",
@@ -76,48 +118,49 @@ document.addEventListener("DOMContentLoaded", function () {
     const sortedJobs = tagOrder.map((tag) =>
       jobs.filter((job) => job.tag === tag)
     ).flat();
-  
+
     sortedJobs.forEach((job) => {
       const jobContainer = document.createElement("div");
       jobContainer.classList.add("job-container", `tag-${job.tag}`);
-  
+
       const jobTitle = document.createElement("span");
       jobTitle.textContent = job.tag;
       jobTitle.classList.add("job-title");
       jobContainer.appendChild(jobTitle);
-  
+
       const imageRow = document.createElement("div");
       imageRow.classList.add("image-row");
-  
+
       job.images.forEach((image) => {
         const imageContainer = document.createElement("div");
         imageContainer.classList.add("image-container");
-  
+
         const describeImageElement = document.createElement("img");
-        describeImageElement.src = image.url;
+        describeImageElement.setAttribute("data-src", image.url);
+        // describeImageElement.src = image.url;
         describeImageElement.alt = image.alt;
-        describeImageElement.classList.add("describe-image");
-  
+        describeImageElement.classList.add("describe-image", "lazy-load");
+
         imageContainer.appendChild(describeImageElement);
         imageRow.appendChild(imageContainer);
       });
-  
+
       const promptTooltip = document.createElement("div");
       const promptText = document.createElement("span");
       promptText.textContent = job.images[0].alt;
       promptTooltip.appendChild(promptText);
       promptTooltip.classList.add("prompt-tooltip");
-  
+
       imageRow.appendChild(promptTooltip);
       jobContainer.appendChild(imageRow);
       jobContainer.appendChild(jobTitle);
       describeImages.appendChild(jobContainer);
     });
-  
+
     describeImagesContainer.appendChild(describeImages);
     comparisonSection.appendChild(groundTruthContainer);
     comparisonSection.appendChild(describeImagesContainer);
-  
+
     return comparisonSection;
   }
 
@@ -406,6 +449,7 @@ window.addEventListener('resize', function() {
         renderGallery(galleryData);
         renderImageComparisons(groundTruthData, galleryData);
         observeSections();
+        lazyLoadImages();  
       });
     })
     .catch((error) => {
