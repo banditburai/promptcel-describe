@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const promptText = document.createElement("div");
         promptText.textContent = image.alt;
         const tagPill = document.createElement("div"); 
-        tagPill.classList.add("tag-pill", `tag-${job.tag}`); // Add CSS classes for styling
+        tagPill.classList.add("tag-pill", `tag-${job.tag}`);
         tagPill.textContent = job.tag;
         promptCell.appendChild(promptText);
         promptCell.appendChild(tagPill); 

@@ -2,17 +2,22 @@ gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener('DOMContentLoaded', function () {
   const galleryItems = document.querySelectorAll('.ground-truth-gallery .gallery-item');
+  const infoButton = document.querySelector('.info-button');
 
   galleryItems.forEach(item => {
-    item.addEventListener('click', function () {
-      const targetId = item.getAttribute('data-target');
+    item.addEventListener('click', function (event) {
+      event.preventDefault();
+      const targetId = item.querySelector('a').getAttribute('href').substring(1);
       const targetSection = document.getElementById(targetId);
 
       if (targetSection) {
         gsap.to(window, {
           duration: 1,
           scrollTo: targetSection,
-          ease: 'power2.inOut'
+          ease: 'power2.inOut',
+          onComplete: function () {
+            infoButton.setAttribute('data-section', targetId);
+          }
         });
       }
     });
