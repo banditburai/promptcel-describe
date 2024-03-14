@@ -79,22 +79,30 @@ document.addEventListener("DOMContentLoaded", function () {
         const img = new Image();
         img.onload = () => {
           if (updateDom) {
-            const imageElement = document.querySelector(
-              `img[data-src="${url}"]`,
-            );
-            if (imageElement) {
+            const imageElements = document.querySelectorAll(`img[data-src="${url}"]`);
+            imageElements.forEach((imageElement) => {
               imageElement.src = url;
               imageElement.classList.remove("lazy-load");
-            }
+              imageElement.removeAttribute("data-src"); // Remove the attribute if you are done with lazy loading
+            });
           }
           resolve(url);
         };
-        img.onerror = () => reject(url);
+        img.onerror = reject;
         img.src = url;
       });
     });
-    return Promise.all(promises);
+    return Promise.all(promises).then(() => {
+      // When all images have been preloaded and the DOM updated, manually trigger a repaint if necessary
+      imageUrls.forEach((url) => {
+        const imageElement = document.querySelector(`img[src="${url}"]`);
+        if (imageElement) {
+          imageElement.style.opacity = "1"; // Ensure it's visible
+        }
+      });
+    });
   }
+  
 
   function getSectionImageUrls(section) {
     if (!section) return [];
@@ -112,26 +120,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const groundTruthContainer = document.createElement("div");
     groundTruthContainer.classList.add("ground-truth-container");
 
-    const placeholderDiv = document.createElement("div");
-  placeholderDiv.classList.add("image-placeholder");
-  placeholderDiv.style.backgroundColor = "#ffdad3"; 
-
-    const groundTruthImageElement = document.createElement("img");
-    groundTruthImageElement.setAttribute("data-src", groundTruthImage.url);
-    // groundTruthImageElement.src = groundTruthImage.url;
+    const groundTruthImageElement = document.createElement("img");    
+    groundTruthImageElement.src = groundTruthImage.url;
     groundTruthImageElement.alt = groundTruthImage.alt;
-    groundTruthImageElement.classList.add("ground-truth-image", "lazy-load");
-
-      // Hide the placeholder when the image is loaded
-    groundTruthImageElement.onload = function() {
-    placeholderDiv.style.display = 'none';
-    groundTruthImageElement.classList.remove("lazy-load");
-  };
+    groundTruthImageElement.classList.add("ground-truth-image");
 
     const groundTruthAlt = document.createElement("div");
     groundTruthAlt.textContent = groundTruthImage.alt;
-    groundTruthAlt.classList.add("ground-truth-alt");
-    groundTruthContainer.appendChild(placeholderDiv);
+    groundTruthAlt.classList.add("ground-truth-alt");    
     groundTruthContainer.appendChild(groundTruthImageElement);
     groundTruthContainer.appendChild(groundTruthAlt);
 
