@@ -304,12 +304,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Twitter link
     const twitterLink = document.createElement("a");
-    twitterLink.href = "https://twitter.com/promptsiren"; // Replace "yourusername" with your actual Twitter username
+    twitterLink.href = "https://twitter.com/promptsiren"; 
     twitterLink.textContent = "Find me on Twitter!";
-    twitterLink.style.display = "block"; // Makes the link appear on its own line
-    twitterLink.target = "_blank"; // Opens the link in a new tab/window
-    twitterLink.rel = "noopener noreferrer"; // Security measure for opening links in a new tab
-    twitterLink.style.marginTop = "20px"; // Adds some space above the Twitter link
+    twitterLink.style.display = "block"; 
+    twitterLink.target = "_blank"; 
+    twitterLink.rel = "noopener noreferrer"; 
+    twitterLink.style.marginTop = "20px"; 
 
     const closeButton = document.createElement("span");
     closeButton.classList.add("close-button");
@@ -480,7 +480,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const comparisonSection = createImageComparison(
         groundTruthImage,
-        item.jobs,
+        item.jobs,        
       );
       imageComparisonsContainer.appendChild(comparisonSection);
     });
@@ -499,7 +499,10 @@ document.addEventListener("DOMContentLoaded", function () {
   ])
     .then(([galleryData, groundTruthData]) => {
       const groundTruthImageUrls = galleryData.map((image) => image.url);
-      preloadImages(groundTruthImageUrls).then(() => {
+      const comparisonGroundTruthImageUrls = groundTruthData.map((item) => item.ground_truth_url);
+      const allGroundTruthImageUrls = [...groundTruthImageUrls, ...comparisonGroundTruthImageUrls];
+      
+      preloadImages(allGroundTruthImageUrls).then(() => {
         renderGallery(galleryData);
         renderImageComparisons(groundTruthData, galleryData);
         observeSections();
