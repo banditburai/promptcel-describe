@@ -254,8 +254,15 @@ document.addEventListener("DOMContentLoaded", function () {
         thumbnail.alt = image.alt;
         thumbnail.classList.add("thumbnail");
         thumbnailCell.appendChild(thumbnail);
-        const promptCell = document.createElement("td");
-        promptCell.textContent = image.alt;
+        const promptCell = document.createElement("td");        
+        promptCell.style.verticalAlign = "top"; 
+        const promptText = document.createElement("div");
+        promptText.textContent = image.alt;
+        const tagPill = document.createElement("div"); 
+        tagPill.classList.add("tag-pill", `tag-${job.tag}`); // Add CSS classes for styling
+        tagPill.textContent = job.tag;
+        promptCell.appendChild(promptText);
+        promptCell.appendChild(tagPill); 
         row.appendChild(thumbnailCell);
         row.appendChild(promptCell);
         tableBody.appendChild(row);
